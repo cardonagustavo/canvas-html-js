@@ -11,11 +11,11 @@ var ctx = c.getContext("2d");
 ctx.lineWidth = 9;
 ctx.fillStyle = "gray";
 
-// Dibujar la línea
+
 ctx.beginPath();
-ctx.moveTo(0, 0);  // Mover al punto de inicio
-ctx.lineTo(300, 300);    // Dibujar una línea hasta el punto final
-ctx.stroke();                  // Trazar la línea
+ctx.moveTo(0, 0);  
+ctx.lineTo(300, 300);    
+ctx.stroke();                 
 
 ctx.fillStyle = "black";
 ctx.fillRect(0, 0, 30, 30)
@@ -134,9 +134,9 @@ ctx.stroke();
 var c = document.getElementById("table");
 var ctx = c.getContext("2d");
 
-var squareSize = 30;  // Tamaño de cada cuadrado
-var numRows = 10;      // Número de filas
-var numCols = 10;      // Número de columnas
+var squareSize = 30;  
+var numRows = 10;      
+var numCols = 10;      
 
 for (var row = 0; row < numRows; row++) {
     for (var col = 0; col < numCols; col++) {
@@ -151,25 +151,27 @@ for (var row = 0; row < numRows; row++) {
 
 // ================== lines ===================
 
-var l = document.getElementById("lines");
-var ctx = l.getContext("2d");
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+
 ctx.lineWidth = 1;
 ctx.strokeStyle = 'black';
 
-    //EJEX
-    ctx.beginPath();
-    ctx.moveTo(150, 0);
-    ctx.lineTo(150, 300);
-    ctx.stroke();
-    ctx.closePath();
-    //EJE Y
-    ctx.beginPath();
-    ctx.moveTo(0, 150);
-    ctx.lineTo(300, 150);
-    ctx.stroke();
-    ctx.closePath();
+EJEX
+ctx.beginPath();
+ctx.moveTo(150, 0);
+ctx.lineTo(150, 300);
+ctx.stroke();
+ctx.closePath();
+EJEY
+ctx.beginPath();
+ctx.moveTo(0, 150);
+ctx.lineTo(300, 150);
+ctx.stroke();
+ctx.closePath();
 
-    ctx.fillStyle = "darkgreen" 
+ctx.stroke()
 
-    
+
+
 
