@@ -1,0 +1,41 @@
+
+html,
+body {
+    background-color: rgb(1, 1, 61);
+    font-family: 'Roboto', serif;
+}
+
+main {
+    margin: 0 auto;
+    text-align: center;
+    max-width: 360px;
+}
+
+#main-heading {
+    margin: 10px auto;
+    text-align: center;
+    color: white;
+    font-family: 'Roboto', serif;
+    max-width: 360px;
+}
+
+#game-canvas {
+    margin: 30px auto;
+}
+
+#win-message {
+    color: white;
+    font-size: 18px;
+    visibility: hidden;
+}
+
+#reset {
+    font-family: 'Roboto', serif;
+    font-size: 18px;
+    width: 165px;
+    height: 50px;
+    border-style: none;
+    border-radius: 2px;
+    background-color: rgb(228, 18, 214);
+    color: rgb(243, 240, 240);
+}
