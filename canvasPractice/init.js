@@ -11,11 +11,10 @@ var ctx = c.getContext("2d");
 ctx.lineWidth = 9;
 ctx.fillStyle = "gray";
 
-
 ctx.beginPath();
-ctx.moveTo(0, 0);  
-ctx.lineTo(300, 300);    
-ctx.stroke();                 
+ctx.moveTo(0, 0);
+ctx.lineTo(300, 300);
+ctx.stroke();
 
 ctx.fillStyle = "black";
 ctx.fillRect(0, 0, 30, 30)
@@ -134,9 +133,9 @@ ctx.stroke();
 var c = document.getElementById("table");
 var ctx = c.getContext("2d");
 
-var squareSize = 30;  
-var numRows = 10;      
-var numCols = 10;      
+var squareSize = 30;
+var numRows = 10;
+var numCols = 10;
 
 for (var row = 0; row < numRows; row++) {
     for (var col = 0; col < numCols; col++) {
@@ -149,29 +148,33 @@ for (var row = 0; row < numRows; row++) {
     }
 }
 
-// ================== lines ===================
+//==================== Text ======================
+
 
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
-ctx.lineWidth = 1;
-ctx.strokeStyle = 'black';
+ctx.font = "30px Comic Samns";
+ctx.fillText("Canvas1", 90, 30);
+ctx.strokeText("Canvas", 90, 60);
 
-EJEX
-ctx.beginPath();
-ctx.moveTo(150, 0);
-ctx.lineTo(150, 300);
-ctx.stroke();
-ctx.closePath();
-EJEY
-ctx.beginPath();
-ctx.moveTo(0, 150);
-ctx.lineTo(300, 150);
-ctx.stroke();
-ctx.closePath();
+//console.log("Contexto del lienzo:", ctx);
 
-ctx.stroke()
+ctx.font = "30px Arial";
+ctx.textAlign = "center"; //w
+ctx.textBaseline = "middle"; //h
+ctx.fillText("canvas", canvas.width / 2, canvas.height / 2);
 
 
+ctx.font = "30px Arial";
+var textMetrics = ctx.measureText("Canvas");
+console.log("Ancho del texto:", textMetrics.width);
 
+//==================== IMG ======================
+window.onload = function () {
+const canvasImg = document.getElementById("imgCanvas");
+const ctx = canvasImg.getContext("2d");
+const image = document.getElementById("control");
+ctx.drawImage(image, 10, 10,canvas.width/5,canvas.height/5); //((elemento imagen) ( x , y) ( W , h))
+}   
 

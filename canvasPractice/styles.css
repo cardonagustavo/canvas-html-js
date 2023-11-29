@@ -1,7 +1,8 @@
 body {
     display: flex;
+    flex-direction: column;
     margin: 0;
-    overflow: hidden;
+    
     
 }
 
@@ -20,3 +21,8 @@ body {
     margin: 5px;
 }
 
+#canvas,
+#imgCanvas {
+    margin: 10px;
+    background-color: rgb(128, 123, 123);
+}
