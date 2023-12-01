@@ -1,8 +1,32 @@
+//==================== Text ======================
+
+
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+
+ctx.font = "30px Comic Samns";
+ctx.fillText("Canvas1", 90, 30);
+ctx.strokeText("Canvas", 90, 60);
+
+//console.log("Contexto del lienzo:", ctx);
+
+
+ctx.font = "30px Arial";
+ctx.textAlign = "center"; //w
+ctx.textBaseline = "middle"; //h
+ctx.fillText("canvas", canvas.width / 2, canvas.height / 2);
+
+
+ctx.font = "30px Arial";
+var textMetrics = ctx.measureText("Canvas");
+console.log("Ancho del texto:", textMetrics.width);
+
+// ================== Square Green ===================
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
 ctx.fillStyle = "darkgreen";
-ctx.fillRect(10, 10, 100, 100);
+ctx.fillRect(0, 0, 300, 300);
 
 // ================== Line ===================
 
@@ -100,16 +124,7 @@ ctx.fillRect(30, 270, 30, 30)
 ctx.fillStyle = "black";
 ctx.fillRect(0, 270, 30, 30)
 
-// ================== Circle ===================
-
-var c = document.getElementById("line");
-var ctx = c.getContext("2d");
-ctx.fillStyle = "blue";
-ctx.beginPath();
-ctx.arc(130, 50, 40, 0, 2 * Math.PI);
-ctx.stroke();
-
-// ================== Home ===================
+// ================== House ===================
 var canvas = document.getElementById("house");
 var ctx = canvas.getContext("2d");
 ctx.lineWidth = 5;
@@ -127,57 +142,6 @@ ctx.lineTo(150, 60);
 ctx.lineTo(250, 140);
 ctx.closePath();
 ctx.stroke();
-
-// ================== Table ===================
-
-var c = document.getElementById("table");
-var ctx = c.getContext("2d");
-
-var squareSize = 30;
-var numRows = 10;
-var numCols = 10;
-
-for (var row = 0; row < numRows; row++) {
-    for (var col = 0; col < numCols; col++) {
-        var x = col * squareSize;
-        var y = row * squareSize;
-
-        ctx.fillStyle = (row + col) % 2 === 0 ? "darkgrey" : "black";
-
-        ctx.fillRect(x, y, squareSize, squareSize);
-    }
-}
-
-//==================== Text ======================
-
-
-var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext("2d");
-
-ctx.font = "30px Comic Samns";
-ctx.fillText("Canvas1", 90, 30);
-ctx.strokeText("Canvas", 90, 60);
-
-//console.log("Contexto del lienzo:", ctx);
-
-ctx.font = "30px Arial";
-ctx.textAlign = "center"; //w
-ctx.textBaseline = "middle"; //h
-ctx.fillText("canvas", canvas.width / 2, canvas.height / 2);
-
-
-ctx.font = "30px Arial";
-var textMetrics = ctx.measureText("Canvas");
-console.log("Ancho del texto:", textMetrics.width);
-
-//==================== IMG ======================
-window.onload = function () {
-    const canvasImg = document.getElementById("imgCanvas");
-    const ctx = canvasImg.getContext("2d");
-    const image = document.getElementById("control");
-    ctx.drawImage(image, 10, 10, canvas.width / 5, canvas.height / 5); //((elemento imagen) ( x , y) ( W , h))
-}
-
 //==================== Forms ======================
 canvas = document.getElementById('canvasForms');
 context = canvas.getContext('2d');
@@ -198,51 +162,81 @@ context.lineTo(250, 150);
 context.lineTo(250, 50);
 context.fill();
 
+
+// ================== Circle ===================
+
+var c = document.getElementById("line");
+var ctx = c.getContext("2d");
+ctx.fillStyle = "blue";
+ctx.beginPath();
+ctx.arc(130, 50, 40, 0, 2 * Math.PI);
+ctx.stroke();
+
+
+// ================== Chess ===================
+
+var c = document.getElementById("table");
+var ctx = c.getContext("2d");
+
+var squareSize = 30;
+var numRows = 10;
+var numCols = 10;
+
+for (var row = 0; row < numRows; row++) {
+    for (var col = 0; col < numCols; col++) {
+        var x = col * squareSize;
+        var y = row * squareSize;
+
+        ctx.fillStyle = (row + col) % 2 === 0 ? "darkgrey" : "black";
+
+        ctx.fillRect(x, y, squareSize, squareSize);
+    }
+}
+//==================== IMG ======================
+window.onload = function () {
+    const canvasImg = document.getElementById("imgCanvas");
+    const ctx = canvasImg.getContext("2d");
+    const image = document.getElementById("control");
+    ctx.drawImage(image, 10, 10,canvas.width/5,canvas.height/5); //((elemento imagen) ( x , y) ( W , h))
+    }  
 //==================== Loop ======================
+class GameLoop1 {
+    constructor() {
+        this.canvas = document.getElementById('canvasLoop');
+        this.ctx = this.canvas.getContext('2d');
+        
+        this.secondsPassed = 0;
+        this.oldTimeStamp = 0;
+        this.fps = 0;
 
-window.onload = init;
+        window.requestAnimationFrame(this.gameLoop.bind(this));
+    }
 
-function init() {
-    canvas = document.getElementById('canvasLoop');
-    ctx = canvas.getContext('2d');
+    draw() {
+        var randomColor = Math.random() > 0.5 ? '#ff8080' : '#0099b0';
+        this.ctx.fillStyle = randomColor;
+        this.ctx.fillRect(50, 50, 200, 200);
+    }
 
-    window.requestAnimationFrame(gameLoop);
+    gameLoop(timeStamp1) {
+        this.secondsPassed = (timeStamp1 - this.oldTimeStamp) / 1000;
+        this.oldTimeStamp = timeStamp1;
+
+        this.fps = Math.round(1 / this.secondsPassed);
+
+        this.ctx.fillStyle = 'purple';
+        this.ctx.fillRect(0, 0, 110, 40);
+        this.ctx.font = '25px Arial';
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillText("FPS: " + this.fps, 10, 30);
+
+        this.draw();
+
+        window.requestAnimationFrame(this.gameLoop.bind(this));
+    }
 }
 
-function gameLoop(timeStamp) {
-    draw();
-
-    window.requestAnimationFrame(gameLoop);
-}
-
-function draw() {
-    var randomColor = Math.random() > 0.5 ? '#ff8080' : '#0099b0';
-    ctx.fillStyle = randomColor;
-    ctx.fillRect(100, 50, 100, 100);
-}
-
-var secondsPassed;
-var oldTimeStamp;
-var fps;
-
-function gameLoop(timeStamp) {
-
-    secondsPassed = (timeStamp - oldTimeStamp) / 1000;
-    oldTimeStamp = timeStamp;
-
-    fps = Math.round(1 / secondsPassed);
-
-    ctx.fillStyle = 'white';
-    ctx.fillRect(0, 0, 200, 100);
-    ctx.font = '25px Arial';
-    ctx.fillStyle = 'black';
-    ctx.fillText("FPS: " + fps, 10, 30);
-
-    draw();
-
-    window.requestAnimationFrame(gameLoop);
-}
-
+const gameLoop1Instance = new GameLoop1();
 //==================== gameLoop2 ======================
 
 var canvas2 = document.getElementById('canvasLoop2');
@@ -280,10 +274,10 @@ class game {
     constructor() {
         this.canvas = document.getElementById('canvasLoop3');
         this.ctx = this.canvas.getContext('2d');
-        this.rectX = 20;
+        this.rectX = 110;
         this.rectY = 0;
-        this.rectSpeed = 100; 
-        this.oldTimeStamp = 10;
+        this.rectSpeed = 3000;
+        this.oldTimeStamp = 0;
         this.fps = 0;
 
         this.init();
@@ -298,12 +292,12 @@ class game {
         
         this.ctx.fillStyle = 'green';
         this.ctx.fillRect(this.rectX, this.rectY, 50, 50);
-        this.ctx.fillStyle = 'white';
 
-        this.ctx.fillRect(0, 0, 0, 0);
+        this.ctx.fillStyle = 'purple';
+        this.ctx.fillRect(0, 0, 99, 50);
         this.ctx.font = '15px Arial';
-        this.ctx.fillStyle = 'black';
 
+        this.ctx.fillStyle = 'white';
         this.ctx.fillText("FPS: " + this.fps, 10, 20);
         this.ctx.fillText("Speed: " + this.rectSpeed, 10, 40);
     }
@@ -330,27 +324,121 @@ class game {
     }
 }
 
-const game = new Game();
+const myGame = new game();
 
-//==================== Intersect ======================
+//==================== Colisions ======================
+function clearCanvas() {
+    var canvas = document.getElementById('canvasCollision');
+    var ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+class Square {
+   
+    constructor(ctx, x, y, vx, vy) {
+        this.ctx = ctx;
+        this.x = x;
+        this.y = y;
+        this.vx = vx;
+        this.vy = vy;
+        this.width = 50;
+        this.height = 50;
+
+    }
+
+    draw() {
+        var { x, y, width, height, isColliding } = this;
+        this.ctx.fillStyle = isColliding ? 'darkgrey' : 'gold';
+        this.ctx.fillRect(x, y, width, height);
+    }
+
+    update(secondsPassed) {
+        this.x += (this.vx * secondsPassed);
+        this.y += (this.vy * secondsPassed);
+    }
+}
+
+var gameObjects;
+
+function createGameSquare() {
+    var canvas = document.getElementById('canvasCollision');
+    var ctx = canvas.getContext('2d');
+    gameObjects = [
+        new Square(ctx, 250, 50, 0, 50),
+        new Square(ctx, 250, 300, 0, -50),
+        new Square(ctx, 150, 0, 50, 50),
+        new Square(ctx, 250, 150, 50, 50),
+        new Square(ctx, 350, 75, -50, 30),
+        new Square(ctx, 300, 300, 50, -50)
+    ];
+}
+
+var oldTimeStamp = 0;
+
+function gameLoop(timeStamp) {
+    var secondsPassed = (timeStamp - oldTimeStamp) / 1000;
+    oldTimeStamp = timeStamp;
+
+    for (var indice = 0; indice < gameObjects.length; indice++) {
+        gameObjects[indice].update(secondsPassed);
+    }
+
+    detectCollisions();
+
+    clearCanvas();
+
+    for (var indice = 0; indice < gameObjects.length; indice++) {
+        gameObjects[indice].draw();
+    }
+
+    window.requestAnimationFrame(gameLoop);
+}
+
+function detectCollisions() {
+    let obj1;
+    let obj2;
+
+    for (let objets = 0; objets < gameObjects.length; objets++) {
+        gameObjects[objets].isColliding = false;
+    }
+
+    for (let objet1 = 0; objet1 < gameObjects.length; objet1++) {
+        obj1 = gameObjects[objet1];
+        
+        for (let objet2 = objet1 + 1; objet2 < gameObjects.length; objet2++) {
+            obj2 = gameObjects[objet2];
+
+            if (rectIntersect(obj1.x, obj1.y, obj1.width, obj1.height, obj2.x, obj2.y, obj2.width, obj2.height)) {
+                obj1.isColliding = true;
+                obj2.isColliding = true;
+            }
+        }
+    }
+}
+
+function rectIntersect(x1, y1, w1, h1, x2, y2, w2, h2) {
+    // Verifica si el borde derecho de rectángulo 1 está a la izquierda del borde izquierdo de rectángulo 2
+    const isLeftOf = x1 < x2 + w2;
+
+    // Verifica si el borde izquierdo de rectángulo 1 está a la derecha del borde derecho de rectángulo 2
+    const isRightOf = x1 + w1 > x2;
+
+    // Verifica si el borde inferior de rectángulo 1 está por encima del borde superior de rectángulo 2
+    const isAbove = y1 < y2 + h2;
+
+    // Verifica si el borde superior de rectángulo 1 está por debajo del borde inferior de rectángulo 2
+    const isBelow = y1 + h1 > y2;
+
+    // Verifica la intersección horizontal (si hay superposición en el eje x)
+    const horizontalOverlap = isLeftOf && isRightOf;
+
+    // Verifica la intersección vertical (si hay superposición en el eje y)
+    const verticalOverlap = isAbove && isBelow;
+
+    // Si hay intersección tanto horizontal como vertical, retorna true
+    return horizontalOverlap && verticalOverlap;
+}
 
 
-// rectIntersect(x1, y1, w1, h1, x2, y2, w2, h2) {
-//     if (x2 > w1 + x1 || x1 > w2 + x2 || y2 > h1 + y1 || y1 > h2 + y2){
-//         return false;
-//     }
-//     return true;
-// }
+createGameSquare();
 
-ctx.font = "30px Arial";
-var textMetrics = ctx.measureText("Canvas");
-console.log("Ancho del texto:", textMetrics.width);
-
-//==================== IMG ======================
-window.onload = function () {
-const canvasImg = document.getElementById("imgCanvas");
-const ctx = canvasImg.getContext("2d");
-const image = document.getElementById("control");
-ctx.drawImage(image, 10, 10,canvas.width/5,canvas.height/5); //((elemento imagen) ( x , y) ( W , h))
-}   
-
+window.requestAnimationFrame(gameLoop);
