@@ -342,5 +342,15 @@ const game = new Game();
 //     return true;
 // }
 
+ctx.font = "30px Arial";
+var textMetrics = ctx.measureText("Canvas");
+console.log("Ancho del texto:", textMetrics.width);
 
+//==================== IMG ======================
+window.onload = function () {
+const canvasImg = document.getElementById("imgCanvas");
+const ctx = canvasImg.getContext("2d");
+const image = document.getElementById("control");
+ctx.drawImage(image, 10, 10,canvas.width/5,canvas.height/5); //((elemento imagen) ( x , y) ( W , h))
+}   
 
