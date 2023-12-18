@@ -197,14 +197,14 @@ window.onload = function () {
     const canvasImg = document.getElementById("imgCanvas");
     const ctx = canvasImg.getContext("2d");
     const image = document.getElementById("control");
-    ctx.drawImage(image, 10, 10,canvas.width/5,canvas.height/5); //((elemento imagen) ( x , y) ( W , h))
-    }  
+    ctx.drawImage(image, 10, 10, canvas.width / 5, canvas.height / 5); //((elemento imagen) ( x , y) ( W , h))
+}
 //==================== Loop ======================
 class GameLoop1 {
     constructor() {
         this.canvas = document.getElementById('canvasLoop');
         this.ctx = this.canvas.getContext('2d');
-        
+
         this.secondsPassed = 0;
         this.oldTimeStamp = 0;
         this.fps = 0;
@@ -289,7 +289,7 @@ class game {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        
+
         this.ctx.fillStyle = 'green';
         this.ctx.fillRect(this.rectX, this.rectY, 50, 50);
 
@@ -326,6 +326,87 @@ class game {
 
 const myGame = new game();
 
+//==================== gameLoop4 ======================
+var canvas4 = document.getElementById('canvasLoop4');
+var ctx4 = canvas4.getContext('2d');
+
+
+var rectX4 = 0;
+var rectY4 = 0;
+var rectSpeed4 = 6;
+var img4 = new Image();
+img4.src = '../IMG/2730738.svg';
+
+
+var rectX5 = -200;
+var rectY5 = canvas4.height - 100;
+var rectSpeed5 = 1;
+var img5 = new Image();
+img5.src = '../IMG/307109.svg';
+
+function draw4() {
+    ctx4.clearRect(0, 0, canvas4.width, canvas4.height);
+
+    ctx4.fillStyle = 'transparent';
+    ctx4.fillRect(rectX4, rectY4, 10, 10);
+    ctx4.drawImage(img4, rectX4, rectY4, 300, 100);
+
+
+    ctx4.fillStyle = 'transparent';
+    ctx4.fillRect(rectX5, rectY5, -10, 10);
+    ctx4.drawImage(img5, rectX5, rectY5, 200, 100);
+}
+
+function gameLoop4() {
+    update4();
+    draw4();
+    window.requestAnimationFrame(gameLoop4);
+}
+
+function update4() {
+
+    rectX4 -= rectSpeed4;
+    if (rectX4 + 50 < -250) {
+        rectX4 = canvas4.width - 0;
+    }
+
+    rectX5 += rectSpeed5;
+    if (rectX5 > canvas4.width) {
+        rectX5 = -200;
+    }
+
+
+}
+
+gameLoop4();
+
+
+// function update4() {
+//     //rectY4 += rectSpeed4;
+//     // if (rectY4 > canvas4.height) {
+//     //     rectY4 = 0;
+//     // }
+
+//     // rectX4 += rectSpeed4;
+//     // if (rectX4 > canvas4.width) {
+//     //     rectX4 = 1;
+//     // }
+
+
+//     rectX4 -= rectSpeed4; 
+
+//     if (rectX4 + 50 < 0) {
+//         rectX4 = canvas4.width - 60; 
+//     }
+
+
+
+
+
+
+// }
+
+
 //==================== Colisions ======================
 function clearCanvas() {
     var canvas = document.getElementById('canvasCollision');
@@ -333,7 +414,7 @@ function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 class Square {
-   
+
     constructor(ctx, x, y, vx, vy) {
         this.ctx = ctx;
         this.x = x;
@@ -403,7 +484,7 @@ function detectCollisions() {
 
     for (let objet1 = 0; objet1 < gameObjects.length; objet1++) {
         obj1 = gameObjects[objet1];
-        
+
         for (let objet2 = objet1 + 1; objet2 < gameObjects.length; objet2++) {
             obj2 = gameObjects[objet2];
 
@@ -413,32 +494,107 @@ function detectCollisions() {
             }
         }
     }
+
 }
+
+console.log(detectCollisions)
 
 function rectIntersect(x1, y1, w1, h1, x2, y2, w2, h2) {
-    // Verifica si el borde derecho de rectángulo 1 está a la izquierda del borde izquierdo de rectángulo 2
-    const isLeftOf = x1 < x2 + w2;
 
-    // Verifica si el borde izquierdo de rectángulo 1 está a la derecha del borde derecho de rectángulo 2
-    const isRightOf = x1 + w1 > x2;
+    // Check if the right edge of rectangle 1 is to the left of the left edge of rectangle 2
+    var isLeftOf = x1 < x2 + w2;
 
-    // Verifica si el borde inferior de rectángulo 1 está por encima del borde superior de rectángulo 2
-    const isAbove = y1 < y2 + h2;
+    // Check if the left edge of rectangle 1 is to the right of the right edge of rectangle 2
+    var isRightOf = x1 + w1 > x2;
 
-    // Verifica si el borde superior de rectángulo 1 está por debajo del borde inferior de rectángulo 2
-    const isBelow = y1 + h1 > y2;
+    // Check if the bottom edge of rectangle 1 is above the top edge of rectangle 2
+    var isAbove = y1 < y2 + h2;
 
-    // Verifica la intersección horizontal (si hay superposición en el eje x)
-    const horizontalOverlap = isLeftOf && isRightOf;
+    // Check if the top edge of rectangle 1 is below the bottom edge of rectangle 2
+    var isBelow = y1 + h1 > y2;
 
-    // Verifica la intersección vertical (si hay superposición en el eje y)
-    const verticalOverlap = isAbove && isBelow;
+    // Check for horizontal intersection (if there is overlap on the x-axis)
+    var horizontalOverlap = isLeftOf && isRightOf;
 
-    // Si hay intersección tanto horizontal como vertical, retorna true
+    // Check for vertical intersection (if there is overlap on the y-axis)
+    var verticalOverlap = isAbove && isBelow;
+
+    // If there is both horizontal and vertical intersection, return true
     return horizontalOverlap && verticalOverlap;
 }
+
 
 
 createGameSquare();
 
 window.requestAnimationFrame(gameLoop);
+
+//==================== Sprit Animation ======================
+
+// var canvas = document.getElementById("spriteCanvas");
+// var ctx = canvas.getContext("2d");
+
+// canvas.width = window.innerWidth;
+// canvas.height = window.innerHeight;
+
+// var images = [];
+// images.length = 13;
+
+// for (var i = 1; i < images.length; i++) {
+//     images[i] = new Image(); 
+//     images[i].src = 'Walk ('+ i.toString()+').png';
+
+//     var i = 1;
+//     setInterval(function(){
+//         i++;
+//         if(i >= 10){
+//             i = 1;
+//         }
+//         c.drawImage(images[i], 100, 100, 100, 100);
+//     },100)
+// }
+
+
+
+
+
+// var spriteWidth = 2000;
+// var spriteHeight = 200;
+// var cols = 16;
+// var rows = 1;
+// var width = spriteWidth / cols;
+// var height = spriteHeight / rows;
+// var frameCount = cols;
+// var srcX = 0;
+// var srcY = 0;
+// var canvas = document.getElementById("spriteCanvas");
+// var ctx = canvas.getContext("2d");
+// var santa = new Image();
+// santa.src = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/183204/char.png';
+// var x = -1;
+// var y = 0;
+// var direction = 1;
+// var speed = 3;
+
+// santa.onload = function () {
+//     setInterval(draw, 1000 / 4);
+// };
+
+// function updateFrame() {
+//     srcX = (srcX + direction * width) % spriteWidth;
+// }
+
+// function draw() {
+//     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+//     x += direction * speed;
+
+//     if (x > canvas.width - width || x < 3) {
+//         direction *= -1;
+//     }
+
+//     updateFrame();
+
+//     ctx.drawImage(santa, srcX, srcY, width, height, x, y, canvas.width, canvas.height);
+// }
+

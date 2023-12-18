@@ -4,28 +4,28 @@ body {
     margin: 0;
 }
 
-#canvas,
-#imgCanvas {
-    margin: 10px;
-    background-color: rgb(128, 123, 123);
-}
 
 #line,
 #table,
 #canvas,
 #house,
 #myCanvas,
+#control,
+#imgCanvas,
 #canvasLoop,
 #canvasForms,
 #canvasLoop2,
 #canvasLoop3,
+#canvasLoop4,
 #canvasCollision {
     margin: 5px;
     border: 1px solid black;
+
 }
 
-#canvas,
-#imgCanvas {
-    margin: 10px;
-    background-color: rgb(128, 123, 123);
+#spriteCanvas{
+    margin: 5px;
+    border: 1px solid black;
+    background-color: aqua;
+
 }
